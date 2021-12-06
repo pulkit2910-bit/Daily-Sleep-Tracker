@@ -1,0 +1,11 @@
+/* INDEX PAGE */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.buttons {
+    margin: 1rem;
+}
