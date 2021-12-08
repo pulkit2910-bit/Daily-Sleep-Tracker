@@ -31,17 +31,11 @@ const UserData = mongoose.model('Data', schema);
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/Login/index.html");
 })
-app.get("/login", (req, res) => {
-    res.sendFile(__dirname + "/Login/login.html");
-})
 app.get("/signup", (req, res) => {
     res.sendFile(__dirname + "/Login/signup.html");
 })
 
 // POST REQUESTS
-app.post("/login-route", (req, res) => {
-    res.redirect("/login");
-})
 app.post("/signup-route", (req, res) => {
     res.redirect("/signup");
 })
