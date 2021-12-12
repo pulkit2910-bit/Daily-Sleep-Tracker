@@ -15,7 +15,9 @@ body, html{
 
     height: 100%;
 
-    background-image: url(https://media.istockphoto.com/videos/multiple-wall-clocks-in-white-background-video-id1206591582?s=640x640);
+    /* background-image: url(https://media.istockphoto.com/videos/multiple-wall-clocks-in-white-background-video-id1206591582?s=640x640); */
+
+    background-image: url(https://previews.123rf.com/images/julynx/julynx1410/julynx141000034/32148706-seamless-background-with-clocks.jpg);
 
     background-repeat: no-repeat;
     background-size: cover;
@@ -23,9 +25,10 @@ body, html{
 
     filter: blur(7px);
 }   
-.container {
+.container-fixed {
 
-    position: absolute;
+    padding: 20px 5px 5px 5px;
+    position: absolute; 
     top: 50%;
     left: 50%;
     display: flex;
@@ -34,27 +37,93 @@ body, html{
     align-items: center;
     color: white;
     background-color: rgb(0, 0, 0, 0.65);
-    border: 3px solid white;
+    border: 3px solid #F8F4EC;
     border-radius: 15px;
     transform: translate(-50%, -50%);
 }
 
+@media (min-width: 420px) {
+    .container-fixed{
+        width:400px;
+    }
+}
+@media (min-width: 700px) {
+    .container-fixed{
+        width:600px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container-fixed{
+        width:720px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container-fixed{
+        width:750px;
+    }
+}
 .buttons {
 
+    width : 25%;
     background-color: white;
     border-radius: 5px;
     margin: 1rem;
 }
+#signin{
 
+    width : 20%;
+}
 .heading{
 
-    font-family: 'Sacramento', cursive;
-    font-size: 65px;
+    font-family: 'Sacramento';
+    font-size: calc(36px + 6 * ((100vw - 320px) / 680));
     font-weight: bold;
-    
+    color: #F3F0E9;
 }
 .header{
 
     font-style: oblique;
     font-size: 25px;
+    color: #F3F0E9;
 }
+#email, #pass{
+
+    width: 350px;
+    height: 34px;
+    border-radius: 6px;
+}
+hr{
+
+    width: 100%;
+}
+input{
+
+    padding-left: 10px;
+    background-color: #252524;
+}
+.details{
+
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+input:hover{
+
+    background-color: white;
+}
+input:focus{
+
+    outline: none;
+    box-shadow: 0px 0px 20px 5px #F3F0E9;
+}
+.heading:hover{
+
+    /* display: none; */
+    display: contents "This web app will fulfill the user's needs in tracking their sleeping patterns, including duration and timings!";
+    
+}
+/* .heading:hover:before{
+
+    content: "";
+} */

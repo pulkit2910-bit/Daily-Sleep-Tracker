@@ -15,21 +15,33 @@
 
     <div class="bg-image"></div>
 
-    <div class="container">
+    <div class="container-fixed">
 
-        <h1 class = "heading">Daily Sleep Tracker</h1>
+        <h1 class = "heading">Daily Sleep Tracker!</h1>
         <br>
         <!-- <div class = "header">This web app will fulfill the user's needs in tracking their sleeping patterns, including duration and timings!</div> -->
         
-        <form action="/" method="post">
-            <input type="email" name="email" id=""><br>
-            <input type="password" name="password" id=""><br>
-            <button type="submit" clsas="btn btn-primary" formaction="/login">Login</button>
+        <br>
+        <form class = "details-form" action="/" method="post">
+            
+            <p class = "details">Email adress</p>
+            <input type="email" name="email" id="email" required placeholder="Enter your email address"><br>
+            
+            <br>
+            <p class = "details">Password</p>
+            <input type="password" name="password" id="pass"  required placeholder="Enter your password"><br>
+            <br>
         </form>
-        <hr>
-        <h6>Do not have an account ?</h6>
+        <form id = "signin" class="buttons" method="post" action="/">
+
+            <button class="btn btn-outline-primary btn-block" type="submit" formaction="/login-route">Log In</button>
+        </form>
+        <br>
+        <p>New User ?</p>
+
         <form class="buttons" action="/" method="post">
-            <button class="btn btn-outline-primary" type="submit" formaction="/signup-route">Sign Up</button> 
+
+            <button class="btn btn-outline-primary btn-block" type="submit" formaction="/signup-route">Sign Up</button> 
         </form>
     </div>
 
