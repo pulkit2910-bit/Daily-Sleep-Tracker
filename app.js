@@ -8,7 +8,9 @@ app.set('view engine', 'ejs');
 const {URLSearchParams} = require('url')
 
 // MONGOOSE
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { ObjectID } = require('bson');
+const { timeStamp, time } = require('console');
 const url = `mongodb+srv://pulkit29:5OnfkE2klHMlPS30@sleepprojectcluster.l3dou.mongodb.net/UserDataDB?retryWrites=true&w=majority`;
 
 mongoose.connect(url)
@@ -21,7 +23,13 @@ mongoose.connect(url)
 
 const schema = new mongoose.Schema({
     email: String,
-    password: String
+    password: String,
+    weekData: [
+        {
+            sleepTime: String,
+            wakeupTime: String
+        }
+    ] //array of objects
 })
 
 const UserData = mongoose.model('Data', schema);
@@ -73,7 +81,7 @@ app.post("/signup", (req, res) => {
                 'password': password
             })
             newData.save();
-
+            
             const pathname = '/user?'
             const components = {
                 id: data._id
@@ -90,7 +98,38 @@ app.get("/user", (req, res) => {
     res.render('home', {action: req.query.id});
 })
 app.post("/user", (req, res) => {
-    res.render('user', {});
+    const pathname = '/user/new-entry?';
+    const components = {
+        id: req.query.id
+    }
+    const urlParameters = new URLSearchParams(components);  
+    res.redirect(pathname + urlParameters);
+})
+
+// NEW ENTRY
+app.get("/user/new-entry", (req, res) => {
+    res.render('entry', {action: req.query.id});
+})
+app.post("/user/new-entry", (req, res) => {
+    var sleepTime = req.body.sleepTime;
+    var wakeupTime = req.body.wakeupTime;
+
+    UserData.updateOne({'_id': req.query.id}, 
+    {$push: 
+        {
+            weekData: {
+                'sleepTime': sleepTime,
+                'wakeupTime': wakeupTime
+            }
+        }
+    }, function (err, docs) {
+            if (err){
+                console.log(err)
+            }
+            else{
+                console.log("Updated Docs : ", docs);
+            }
+    });
 })
 
 

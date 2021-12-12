@@ -13,8 +13,10 @@
 </head>
 <body>
 
-    <form action="" method="post">
-        <input type="text" name="sleepTime" id="">
+    <form action="/user/new-entry?id=<%= action %>" method="post">
+        <input type="time" name="sleepTime" id=""><br>
+        <input type="time" name="wakeupTime" id="">
+        <button type="submit">Add Entry</button>
     </form>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
