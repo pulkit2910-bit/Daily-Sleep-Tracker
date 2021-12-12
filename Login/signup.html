@@ -12,13 +12,30 @@
 
 </head>
 <body>
+    <div class="bg-image"></div>
 
-    <form action="/signup" method="post">
-        <input type="email" name="email" id=""><br>
-        <input type="password" name="password" id=""><br>
-        <button type="submit" clsas="btn btn-primary">Sign Up</button>
-    </form>
+    <div class="container-fixed">
 
+        <h1 class = "heading">Start tracking your progress...</h1>
+        <h1 class = "heading">Sign up!</h1>
+        <br>
+        <form class = "details-form" action="/" method="post">
+            
+            <p class = "details">Email adress</p>
+            <input type="email" name="email" id="email" required placeholder="Enter your email address"><br>
+            
+            <br>
+            <p class = "details">Password</p>
+            <input type="password" name="password" id="pass"  required placeholder="Enter your password"><br>
+            
+            <br>
+        </form>
+        <form class="buttons" action="/signup" method="post">
+
+            <button type="submit" class="btn btn-outline-primary btn-block">Sign Up</button>
+        </form>
+    <div>
+        
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
