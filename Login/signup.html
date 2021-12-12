@@ -19,7 +19,7 @@
         <h1 class = "heading">Start tracking your progress...</h1>
         <h1 class = "heading">Sign up!</h1>
         <hr>
-        <form class = "details-form" action="/" method="post">
+        <form class = "details-form" action="/signup" method="post">
             
             <p class = "details">Email adress</p>
             <input type="email" name="email" id="email" required placeholder="Enter your email address"><br>
@@ -27,12 +27,10 @@
             <br>
             <p class = "details">Password</p>
             <input type="password" name="password" id="pass"  required placeholder="Enter your password"><br>
-            
             <br>
-        </form>
-        <form class="button-signup" action="/signup" method="post">
-
-            <button type="submit" class="btn btn-outline-primary btn-block">Sign Up</button>
+            <div class="button-signup">
+                <button type="submit" class="btn btn-outline-success btn-block">Sign Up</button>
+            </div>
         </form>
         <br>
     <div>
