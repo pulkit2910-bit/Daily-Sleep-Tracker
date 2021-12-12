@@ -25,24 +25,22 @@
         <form class = "details-form" action="/" method="post">
             
             <p class = "details">Email adress</p>
-            <input type="email" name="email" id="email" required placeholder="Enter your email address"><br>
+            <input type="email" name="email" id="email" placeholder="Enter your email address"><br>
             
             <br>
             <p class = "details">Password</p>
-            <input type="password" name="password" id="pass"  required placeholder="Enter your password"><br>
+            <input type="password" name="password" id="pass"  placeholder="Enter your password"><br>
             <br>
-        </form>
-        <form id = "signin" class="buttons" method="post" action="/">
+            <div class="buttons" id="signin">
+                <button class="btn btn-outline-primary btn-block" type="submit" formaction="/login">Log In</button>
+            </div>
+            <p>New User ?</p>
+            <div class="buttons" id="signin">
+                <button class="btn btn-outline-primary btn-block" type="submit" formaction="/signup-route">Sign Up</button> 
+            </div>
 
-            <button class="btn btn-outline-primary btn-block" type="submit" formaction="/login-route">Log In</button>
         </form>
         <br>
-        <p>New User ?</p>
-
-        <form class="buttons" action="/" method="post">
-
-            <button class="btn btn-outline-primary btn-block" type="submit" formaction="/signup-route">Sign Up</button> 
-        </form>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

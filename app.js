@@ -84,7 +84,7 @@ app.post("/signup", (req, res) => {
             
             const pathname = '/user?'
             const components = {
-                id: data._id
+                id: newData._id
             }
             const urlParameters = new URLSearchParams(components);  
             res.redirect(pathname + urlParameters);
