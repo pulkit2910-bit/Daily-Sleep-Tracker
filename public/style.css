@@ -1,45 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="style.css">
+/* INDEX PAGE */
 
-    <!-- bootstrap  -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
 
-</head>
-<body>
-    <div class="bg-image"></div>
+*{
 
-    <div class="container-fixed">
+    box-sizing: border-box;
+}
+body, html{
 
-        <h1 class = "heading">Start tracking your progress...</h1>
-        <h1 class = "heading">Sign up!</h1>
-        <hr>
-        <form class = "details-form" action="/" method="post">
-            
-            <p class = "details">Email adress</p>
-            <input type="email" name="email" id="email" required placeholder="Enter your email address"><br>
-            
-            <br>
-            <p class = "details">Password</p>
-            <input type="password" name="password" id="pass"  required placeholder="Enter your password"><br>
-            
-            <br>
-        </form>
-        <form class="button-signup" action="/signup" method="post">
+    height: 100%;
+    
+}
+.bg-image{
 
-            <button type="submit" class="btn btn-outline-primary btn-block">Sign Up</button>
-        </form>
-        <br>
-    <div>
-        
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html> 
+    height: 100%;
 
+    /* background-image: url(https://media.istockphoto.com/videos/multiple-wall-clocks-in-white-background-video-id1206591582?s=640x640); */
+
+    background-image: url(https://previews.123rf.com/images/julynx/julynx1410/julynx141000034/32148706-seamless-background-with-clocks.jpg);
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    filter: blur(7px);
+}   
+.container-fixed {
+
+    padding: 20px 5px 5px 5px;
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    color: white;
+    background-color: rgb(0, 0, 0, 0.65);
+    border: 3px solid #F8F4EC;
+    border-radius: 15px;
+    transform: translate(-50%, -50%);
+}
+
+@media (min-width: 420px) {
+    .container-fixed{
+        width:400px;
+    }
+}
+@media (min-width: 700px) {
+    .container-fixed{
+        width:600px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container-fixed{
+        width:720px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container-fixed{
+        width:750px;
+    }
+}
+.buttons {
+
+    width : 25%;
+    background-color: white;
+    border-radius: 5px;
+    margin-left: 9rem;
+}
+.button-signup{
+
+    width : 25%;
+    background-color: white;
+    border-radius: 5px;
+}
+.heading{
+
+    font-family: 'Sacramento';
+    font-size: calc(36px + 6 * ((100vw - 320px) / 680));
+    font-weight: bold;
+    color: #F3F0E9;
+}
+.header{
+
+    font-style: oblique;
+    font-size: 25px;
+    color: #F3F0E9;
+}
+#email, #pass{
+
+    width: 350px;
+    height: 34px;
+    border-radius: 6px;
+}
+hr{
+
+    width: 100%;
+}
+input{
+
+    padding-left: 10px;
+    background-color: #252524;
+}
+.details{
+
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+input:hover{
+
+    background-color: white;
+}
+input:focus{
+
+    background-color: white;
+    outline: none;
+    box-shadow: 0px 0px 20px 5px #F3F0E9;
+}
+.heading:hover{
+
+    /* display: none; */
+    display: contents "This web app will fulfill the user's needs in tracking their sleeping patterns, including duration and timings!";
+    
+}
+#new-user{
+
+    margin-left: 150px;
+}
+/* .heading:hover:before{
+
+    content: "";
+} */
