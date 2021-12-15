@@ -3,44 +3,29 @@ const express = require('express');
 const app = express();
 app.use(express.urlencoded())
 app.use(express.static("public"));
+
+// EJS
 app.set('view engine', 'ejs');
 
+// Morgan
+var morgan = require('morgan')
+app.use(morgan('combined'))
+
+// URL
 const {URLSearchParams} = require('url')
 
-// MONGOOSE
-const mongoose = require('mongoose');
-const { ObjectID } = require('bson');
-const { timeStamp, time } = require('console');
-const url = `mongodb+srv://pulkit29:5OnfkE2klHMlPS30@sleepprojectcluster.l3dou.mongodb.net/UserDataDB?retryWrites=true&w=majority`;
+// Routes 
+const login = require('./Routes/login.js');
+const signup = require('./Routes/signup.js');
+const user = require('./Routes/user.js');
 
-mongoose.connect(url)
-    .then( () => {
-        console.log('Connected to database ')
-    })
-    .catch( (err) => {
-        console.error(`Error connecting to the database. \n${err}`);
-    })
+// Mongoose connect and model
+const UserData = require('./models/db.js');
 
-const schema = new mongoose.Schema({
-    email: String,
-    password: String,
-    weekData: [
-        {
-            sleepTime: String,
-            wakeupTime: String
-        }
-    ] //array of objects
-})
-
-const UserData = mongoose.model('Data', schema);
-
-//LOGIN/SIGNUP 
+// LOGIN/SIGNUP 
 // GET REQUESTS
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/Login/index.html");
-})
-app.get("/signup", (req, res) => {
-    res.sendFile(__dirname + "/Login/signup.html");
+    res.sendFile(__dirname + "/public/Login/index.html");
 })
 
 // POST REQUESTS
@@ -48,90 +33,14 @@ app.post("/signup-route", (req, res) => {
     res.redirect("/signup");
 })
 
-app.post("/login", (req, res) => {
-    var email = req.body.email;
-    var password = req.body.password;
+// LOGIN ROUTE
+app.use(login);
 
-    UserData.findOne({'email': email, 'password': password}, (err, data) => {
-        if (data === null) {
-            res.send("User not Found !");
-        }
-        else {
-            const pathname = '/user?'
-            const components = {
-                id: data._id
-            }
-            const urlParameters = new URLSearchParams(components);  
-            res.redirect(pathname + urlParameters);
-        }
-    })
-})
-
-app.post("/signup", (req, res) => {
-    var email = req.body.email;
-    var password = req.body.password;
-
-    UserData.findOne({'email': email, 'password': password}, (err, data) => {
-        if (data != null) {
-            res.send("User already Exists !");
-        }
-        else {
-            var newData = new UserData({
-                'email': email,
-                'password': password
-            })
-            newData.save();
-            
-            const pathname = '/user?'
-            const components = {
-                id: newData._id
-            }
-            const urlParameters = new URLSearchParams(components);  
-            res.redirect(pathname + urlParameters);
-        }
-    })
-
-})
+// SIGNUP ROUTE
+app.use(signup);
 
 // USER INTERFACE(HOME)
-app.get("/user", (req, res) => {
-    res.render('home', {action: req.query.id});
-})
-app.post("/user", (req, res) => {
-    const pathname = '/user/new-entry?';
-    const components = {
-        id: req.query.id
-    }
-    const urlParameters = new URLSearchParams(components);  
-    res.redirect(pathname + urlParameters);
-})
-
-// NEW ENTRY
-app.get("/user/new-entry", (req, res) => {
-    res.render('entry', {action: req.query.id});
-})
-app.post("/user/new-entry", (req, res) => {
-    var sleepTime = req.body.sleepTime;
-    var wakeupTime = req.body.wakeupTime;
-
-    UserData.updateOne({'_id': req.query.id}, 
-    {$push: 
-        {
-            weekData: {
-                'sleepTime': sleepTime,
-                'wakeupTime': wakeupTime
-            }
-        }
-    }, function (err, docs) {
-            if (err){
-                console.log(err)
-            }
-            else{
-                console.log("Updated Docs : ", docs);
-            }
-    });
-})
-
+app.use(user);
 
 // PORT
 app.listen(3000, () => {
