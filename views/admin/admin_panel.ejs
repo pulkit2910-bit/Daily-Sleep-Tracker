@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- bootstrap  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+
+    <form method="post" action="/admin/panel/<%= action %>" class="new-post">
+        <button type="submit" class="btn btn-primary" formaction="/admin/compose-route/<%= action %>">Compose</button>
+        <button type="submit" class="btn btn-primary" formaction="/admin/blogs-route/<%= action %>">Blogs</button>
+    </form>
+
+    <ul class="posts-container">
+        
+        <div class="posts">
+            <h4> Home </h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis sint error eius aliquid in modi illo omnis eligendi consectetur iusto eaque odit, dicta, fugiat autem. Ut architecto, totam mollitia rerum ratione, amet ad dicta similique fugit nobis cupiditate recusandae inventore quisquam perferendis. Dolores ullam, totam magnam aliquid corrupti quisquam numquam enim ipsum minus incidunt, libero at eligendi quasi iste illum?</p>
+        </div>
+
+    </ul>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> 
+

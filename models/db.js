@@ -13,8 +13,9 @@ mongoose.connect(url)
     })
 
 const schema = new mongoose.Schema({
-    email: String,
-    password: String,
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    refreshToken: String,
     weekData: [
         {
             sleepTime: String,

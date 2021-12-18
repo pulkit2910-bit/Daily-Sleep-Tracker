@@ -13,8 +13,9 @@
 </head>
 <body>
 
-    <form action="/user?id=<%= action %>" method="post">
-        <button type="submit">New Entry</button>
+    <form action="/user/<%= action %>" method="post">
+        <button type="submit" formaction="/user/newEntry-route/<%= action %>">New Entry</button>
+        <button type="submit" formaction="/user/blogs-route/<%= action %>">Blogs</button>
     </form>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

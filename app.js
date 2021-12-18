@@ -1,8 +1,22 @@
+// require('dotenv/config')
+const { verify } = require('jsonwebtoken');
+const { hash, compare } = require('bcryptjs');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+
 // EXPRESS
 const express = require('express');
 const app = express();
 app.use(express.urlencoded())
 app.use(express.static("public"));
+app.use(cookieParser());
+
+app.use(
+    cors({
+        origin: 'http://localhost:3000',
+        credentials: true
+    })
+);
 
 // EJS
 app.set('view engine', 'ejs');
@@ -18,6 +32,7 @@ const {URLSearchParams} = require('url')
 const login = require('./Routes/login.js');
 const signup = require('./Routes/signup.js');
 const user = require('./Routes/user.js');
+const admin = require('./Routes/admin.js');
 
 // Mongoose connect and model
 const UserData = require('./models/db.js');
@@ -41,6 +56,9 @@ app.use(signup);
 
 // USER INTERFACE(HOME)
 app.use(user);
+
+// ADMIN PANEL
+app.use(admin);
 
 // PORT
 app.listen(3000, () => {
