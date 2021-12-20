@@ -9,7 +9,6 @@
 body, html{
 
     height: 100%;
-    
 }
 .bg-image{
 
@@ -128,7 +127,38 @@ input:focus{
 
     margin-left: 150px;
 }
-/* .heading:hover:before{
+.home-content{
 
-    content: "";
-} */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    font-size: calc(15px + 3 * ((100vw - 320px) / 680));
+}
+.heading-home{
+
+    margin-top: 15px;
+    font-family: 'Sacramento';
+    text-align: center;
+    font-weight: bold;
+    /* font-size: 60px; */
+    font-size: calc(43px + 6 * ((100vw - 320px) / 680));
+}
+.buttons-home{
+
+    padding-top: 25px;
+    text-align: center;
+    justify-content: center
+}
+#about{
+
+    padding-top: 8%;
+}
+#music{
+
+    padding-top: 8%;
+}
+.about-content{
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    font-size: calc(13px + 3 * ((100vw - 320px) / 680));
+}
