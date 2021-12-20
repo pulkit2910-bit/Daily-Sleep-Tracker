@@ -10,57 +10,31 @@ router.get("/signup", (req, res) => {
 })
 
 router.post("/signup", (req, res) => {
-    var email = req.body.email;
+    var email = req.body.email.trim();
     var password = req.body.password;
 
-    try {
+    UserData.findOne({'email': email}, async (err, data) => {
+        if (data) {
+            res.send('User already exists');
+        }
+        else {
+            // 2. If user does not exist, hash the password
+            const hashedPassword = await hash(password, 10);
 
-        // 1. Check if user exists
-        UserData.findOne({'email': email}, async (err, data) => {
-            if (data) {
-                throw new Error('User already exists');
-            }
-            else {
-                // 2. If user does not exist, hash the password
-                const hashedPassword = await hash(password, 10);
-
-                var newData = new UserData({
-                    'email': email,
-                    'password': hashedPassword
-                })
-                newData.save();
-                
-                const pathname = '/user/'
-                const components = {
-                    id: newData._id
-                }
-                const urlParameters = new URLSearchParams(components);  
-                res.redirect(pathname + urlParameters);
-            }
-        })
-    } catch(err) {
-        res.send(err);
-    }
-
-    // UserData.findOne({'email': email}, (err, data) => {
-    //     if (data != null) {
-    //         res.send("User already Exists !");
-    //     }
-    //     else {
-    //         var newData = new UserData({
-    //             'email': email,
-    //             'password': password
-    //         })
-    //         newData.save();
+            var newData = new UserData({
+                'email': email,
+                'password': hashedPassword
+            })
+            newData.save();
             
-    //         const pathname = '/user?'
-    //         const components = {
-    //             id: newData._id
-    //         }
-    //         const urlParameters = new URLSearchParams(components);  
-    //         res.redirect(pathname + urlParameters);
-    //     }
-    // })
+            const pathname = '/user/'
+            const components = {
+                id: newData._id
+            }
+            const urlParameters = new URLSearchParams(components);  
+            res.redirect(pathname + urlParameters);
+        }
+    })
 
 })
 
