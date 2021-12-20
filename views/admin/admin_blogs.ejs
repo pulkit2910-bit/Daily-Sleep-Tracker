@@ -20,12 +20,18 @@
                 <h3> <%= posts[i].title %> </h3>
                 <p> 
                     <%= posts[i].subcontent %>...
-                    <a href="/admin/<%= posts[i]._id %>">Read More</a> 
+                    <a href="/admin/<%= posts[i]._id %>" id="submit" onclick="myFunction()">Read More</a> 
                 </p>
             </div> 
         <% } %>
 
     </ul>
+
+    <script>
+        function myFunction() {
+            document.getElementById("submit").submit();
+        }
+    </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
