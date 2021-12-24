@@ -109,11 +109,11 @@ input{
 }
 input:hover{
 
-    background-color: white;
+    background-color: #F8F4EC;
 }
 input:focus{
 
-    background-color: white;
+    background-color: #F8F4EC;
     outline: none;
     box-shadow: 0px 0px 20px 5px #F3F0E9;
 }
