@@ -123,6 +123,14 @@ input:focus{
     display: contents "This web app will fulfill the user's needs in tracking their sleeping patterns, including duration and timings!";
     
 }
+input:focus::placeholder{
+
+    color: transparent;
+}
+input::placeholder{
+
+    transition: color 0.5s ease;
+}
 #new-user{
 
     margin-left: 150px;
