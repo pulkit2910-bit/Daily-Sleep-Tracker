@@ -1,9 +1,10 @@
 require('dotenv/config')
-const { sign } = require('jsonwebtoken');
+const { sign, verify } = require('jsonwebtoken');
+const UserData = require('../models/db');
 
-const createAccessToken = (objectID) => {
-    return sign({ id: objectID }, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '15m',
+const createAccessToken = (object) => {
+    return sign({ object: object}, process.env.ACCESS_TOKEN_SECRET, {
+            expiresIn: '10s',
     })
 };
 
@@ -24,6 +25,15 @@ const sendRefreshToken = (res, refreshToken) => {
     res.cookie('refreshToken', token, {
         httpOnly: true,
         path: '/refresh-token'
+    })
+}
+
+const findByToken = (token, cb) => {
+    verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decode) => {
+        UserData.findOne({"_id": decode, "token":token},function(err,data){
+            if(err) return cb(err);
+            cb(null,data);
+        })
     })
 }
 

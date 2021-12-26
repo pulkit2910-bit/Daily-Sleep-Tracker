@@ -1,37 +1,42 @@
+require('dotenv/config')
 const express = require('express');
 const router = express.Router();
 const UserData = require('../models/db');
 const { createAccessToken, createRefreshToken, sendAccessToken, sendRefreshToken } = require('./token');
-const { verify } = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const { hash, compare } = require('bcryptjs');
+const cookieParser=require('cookie-parser');
 
-router.post("/login", (req, res) => {
+// MIDDLEWARE
+const {validateUser} = require('../middleware/validation')
 
-    var email = req.body.email.trim();
+router.post("/login", validateUser, (req, res) => {
+
+    var email = req.body.email;
     var password = req.body.password;
 
-    UserData.findOne({'email': email}, async (err, data) => {
+    UserData.findOne({'email': email}, async (err, user) => {
         // 1. If user does not exist
-        if (!data) {
-            res.send("User not Found !");
+        if (!user) {
+            return res.json({isAuth : false, message : ' Auth failed ,email not found'});
         }
         // 2. If User exists, compare password
         else {
-            const valid  = await compare(password, data.password);
-            if (!valid) res.send("Wrong Password");
+            const valid  = await compare(password, user.password);
+            if (!valid) return res.json({ isAuth : false,message : "password doesn't match"});
 
-            // 3. Create Refresh and Access Token
+            // // 3. Create Refresh and Access Token
             
-            const accessToken = createAccessToken(data._id);
-            const refreshToken = createRefreshToken(data._id);
-
-            data.refreshToken = refreshToken;
+            const token = jwt.sign({id: user._id},process.env.ACCESS_TOKEN_SECRET,{
+                expiresIn: '7d'
+            });
 
             const pathname = '/user/'
-            const urlParameters = data._id;  
+            const urlParameters = user._id;  
             res.redirect(pathname + urlParameters);
         }
     })
+
     
 })
 

@@ -10,12 +10,14 @@
     <!-- bootstrap  -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body class = "bg-warning">
   
-    <nav class="navbar navbar-expand-lg navbar-dark" style = "background-color: #3D3856;">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style = "background-color: #3D3856;">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Sleepify</a>
+          <a class="navbar-brand" href="#"><h1>Sleepify</h1></a>
     
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -40,98 +42,323 @@
         </div>
       </nav>
       
-      <div class = "container">
-    
-        <div class = "heading-home">
-            
-            <p>Welcome to Sleepify!</p>
-            
-            <img class = "img-fluid" src = "../sleep.png">
-            
-            <hr>
-        </div>
+      <section id="home">
 
-        <secition id="home">
-
-          <div class = "home-content">
-              
-              <p>This web app will fulfill the user's needs in tracking their sleeping patterns, including duration and timings.</p>
-              
-              <form class = "buttons-home" action="/user/<%= action %>" method="post">
-                  
-                  <button class = "btn text-light" style = "background-color: #3D3856;" type="submit" formaction="/user/newEntry-route/<%= action %>">New Entry</button>
-                  
-                  <button class = "btn text-light" style = "background-color: #3D3856;" type="submit" formaction="/user/blogs-route/<%= action %>">Blogs</button>
-              </form>
-          </div>
-          <br>
-      </secition>
-
+        <div class = "container">
+        
+            <div class = "heading-home">
+                
+                <div class="home-content">
+                    <h1 class="heading-home">Welcome to Sleepify!</h1>
+                </div>
+                
+                <div class="home-content">
+                    <div class="home-sec-content">
+                        <p class="p-primary">This web app will fulfill the user's needs in tracking their sleeping patterns, including duration and timings.</p>
+                        <form class = "buttons-home" action="/user/<%= action %>" method="post">
+                    
+                            <button class = "btn text-light" style = "background-color: #3D3856;" type="submit" formaction="/user/newEntry-route/<%= action %>">New Entry</button>
+                            
+                        </form>
+                    </div>
+                    <img class = "img-fluid" src = "../sleep.png" width="40%">
+                </div>
+                
+            </div>
+            
+        </section>
+        
+    <hr>
       <section id="about">
 
         <div class = "heading-home">
             
           <p>About</p>
           
-          <hr>
         </div>
-
+        
         <div class = "about-content">
-
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad amet hic, omnis maxime quis eos? Accusantium tempore quia, est aperiam molestias amet blanditiis doloribus. Repellat perspiciatis accusantium quisquam, alias, tenetur perferendis laudantium dolore facere aliquid hic ipsum ab reiciendis odit praesentium ullam eos labore neque quibusdam placeat cum consequatur! Culpa?</p>
+            
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad amet hic, omnis maxime quis eos? Accusantium tempore quia, est aperiam molestias amet blanditiis doloribus. Repellat perspiciatis accusantium quisquam, alias, tenetur perferendis laudantium dolore facere aliquid hic ipsum ab reiciendis odit praesentium ullam eos labore neque quibusdam placeat cum consequatur! Culpa?</p>
         </div>
-      </section>
+    </section>
+    
+    <hr>
 
-      <section id="music">
+    <section id="blogs" class="pt-5 pb-5">
+
+        <div class = "heading-home">
+            
+            <p>Blogs</p>
+            
+        </div>
+
+        <div class="container">
+          <div class="row">
+                <div class="col-6">
+                  <h3 class="mb-3">Blogs</h3>
+                </div>
+                <div class="col-6 text-right">
+                  <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators1" role="button" data-slide="prev">
+                    <i class="fa fa-arrow-left"></i>
+                  </a>
+                  <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators1" role="button" data-slide="next">
+                    <i class="fa fa-arrow-right"></i>
+                  </a>
+                </div>
+                <div class="col-12">
+                  <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
+                    
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <div class="row">
+          
+                          <% for(let i=0; i < 3; i++) { %>
+
+                              <div class="col-md-4 mb-3">
+                                <div class="card">
+                                  <img class="img-fluid" alt="100%x280" src="https://source.unsplash.com/1600x900/?sleep">
+                                  <div class="card-body">
+                                    <h4 class="card-title"><%= blogs[i].title %> </h4>
+                                    <p class="card-text">
+                                      <%= blogs[i].subcontent %>...
+                                      <a href="/user/blog/<%= blogs[i]._id %>" id="submit" onclick="myFunction()"> Read More </a> 
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+
+                          <% } %>
+                          
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="carousel-item">
+                        <div class="row">
+          
+                          <% for(let i=0; i < 2; i++) { %>
+
+                              <div class="col-md-4 mb-3">
+                                <div class="card">
+                                  <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">
+                                  <div class="card-body">
+                                    <h4 class="card-title"><%= blogs[i].title %> </h4>
+                                    <p class="card-text">
+                                      <%= blogs[i].subcontent %>...
+                                      <a href="/user/blog/<%= blogs[i]._id %>" id="submit" onclick="myFunction()"> Read More </a> 
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+
+                          <% } %>
+                            
+                          <div class="col-md-4 mb-3">
+                            <div class="card">
+                              <div class="card-body" style="align-items: center;">
+                                <form class = "buttons-home" action="/user/<%= action %>" method="post">
+                                  <p class="card-text">For More Blogs </p>
+                                  <button class = "btn text-light" style = "background-color: #3D3856;" type="submit" formaction="/user/blogs-route/<%= action %>">Click Here</button> 
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>                                    
+                      
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </section> 
+
+    <hr>
+
+      <section id="music" class="pt-5 pb-5">
         
         <div class = "heading-home">
             
           <p>Music</p>
           
-          <hr>
         </div>
+        
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <h3 class="mb-3">Music</h3>
+      </div>
+      <div class="col-6 text-right">
+        <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+          <i class="fa fa-arrow-left"></i>
+        </a>
+        <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </div>
+      <div class="col-12">
+        <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
 
-        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="" class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>First slide label</h5>
-                <p>Some representative placeholder content for the first slide.</p>
+              <div class="row">
+
+                <div class="col-md-3 mb-3">
+                  <div class="card">
+                    <img class="img-fluid music-img" alt="100%x280" src="../images/birds.jpg" id="birds">
+                    <!-- <audio>
+                      <source src="../public/Audio/birds.mp3">
+                      Your browser does not support the audio tag.
+                    </audio> -->
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card">
+                    <img class="img-fluid music-img" alt="100%x280" src="../images/raindrops.jpg" id="raindrops">
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card">
+                    <img class="img-fluid music-img" alt="100%x280" src="../images/heavy-rain.jpg" id="heavy-rain">
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card">
+                    <img class="img-fluid music-img" alt="100%x280" src="../images/nature.jpg" id="nature">
+                  </div>
+                </div>
+                
               </div>
             </div>
+            
+            
             <div class="carousel-item">
-              <img src="" class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Second slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
+              <div class="row">
+                                
+                <div class="col-md-3 mb-3">
+                  <div class="card">
+                    <img class="img-fluid music-img" alt="100%x280" src="../images/morning.jpg" id="morning">
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card">
+                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card">
+                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card">
+                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">
+                  </div>
+                </div>
+
               </div>
             </div>
+            
+            
             <div class="carousel-item">
-              <img src="" class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
+              <div class="row">
+                           <div class="col-md-3 mb-3">
+                  <div class="card">
+                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">              
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card">
+                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">              
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card">
+                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">              
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card">
+                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">              
+                  </div>
+                </div>
               </div>
             </div>
+            
+            
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
         </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      </div>
+    </div>
+  </div>
+</section>
+    <hr>
+
+    <script>
+      function myFunction() {
+          document.getElementById("submit").submit();
+      } 
+
+      const musicImgs = document.querySelectorAll(".music-img");
+      for(let i=0; musicImgs.length; i++) {
+        
+        musicImgs[i].addEventListener("click", () => {
+
+          var id = musicImgs[i].getAttribute("id");
+          playMusic(id);
+
+          musicImgs[i].addEventListener("click", () => {
+            musicImgs[i].classList.toggle("active-music");
+          })
+        })
+
+      }
+
+      function playMusic(id) {
+
+        switch (id) {
+
+          case "birds":
+            var audio = new Audio("../Audio/birds.mp3");
+            audio.play();
+            break;
+
+          case "raindrops":
+            var audio = new Audio("../Audio/rainDrops.mp3");
+            audio.play();
+            break;
+
+          case "heavy-rain":
+            var audio = new Audio("../Audio/Heavy-Rain.mp3");
+            audio.play();
+            break;
+
+          case "nature":
+            var audio = new Audio("../Audio/nature_melody.mp3");
+            audio.play();
+            break;
+
+          case "morning":
+            var audio = new Audio("../Audio/morning-surf.mp3");
+            audio.play();
+            break;
+
+        
+          default:
+            break;
+        }
+
+      }
+
+  </script>
+
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>     
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html> 
 

@@ -5,47 +5,17 @@ const BlogsData = require('../models/blogs');
 const path = require("path");
 const { hash, compare } = require('bcryptjs');
 
+//CONTROLLER
+const admin_controller = require('../controllers/admin_controller')
+
 // LODASH FOLDERS
 var _ = require('lodash');
-
-// DATE FUNCTION
-function dayDate() {
-    let date = new Date();
-    options = {
-        weekday: 'long',
-        year: 'numeric',
-        day: 'numeric',
-        month: 'numeric'
-    }
-    
-    return date.toLocaleDateString('en-US', options);
-}
 
 router.get("/admin", (req, res) => {
     res.render('admin/admin_login');
 })
 
-router.post("/admin", (req, res) => {
-
-    const email = req.body.email;
-    const password = req.body.password;
-
-    UserData.findOne({'email': "ranjanpulkit2910@gmail.com"}, async (err, data) => {
-
-        if (!data) throw new Error("Admin not Found !");
-
-        else {
-            const valid  = await compare(password, data.password);
-            if (!valid) throw new Error("Wrong Password");
-
-            const pathname = '/admin/panel/';
-            const urlParameters = data._id;  
-            res.redirect(pathname + urlParameters);
-        }
-
-    })
-
-})
+router.post("/admin", admin_controller.admin_login);
 
 router.get("/admin/panel/:id", (req, res) => {
     res.render('admin/admin_panel', {action: req.params.id});
@@ -68,54 +38,23 @@ router.get("/admin/compose/:id", (req, res) => {
     res.render('admin/admin_compose', {action: req.params.id});
 })
 
-router.post("/admin/compose/:id", (req, res) => {
-    const title = req.body.title;
-    const content = req.body.content;
-    const subContent = content.substring(0, 50);
-    
-    BlogsData.findOne({'title': title, 'content': content}, (err, data) => {
-
-        if (data) throw new Error('Blog already exists!');
-        else {
-
-            var newBlog = new BlogsData({
-                'title': title,
-                'subcontent': subContent,
-                'content': content
-            })
-            newBlog.save();
-            console.log("Blog saved");
-        }
-    })
-
-    const pathname = '/admin/blogs/';
-    const urlParameters = req.params.id;  
-    res.redirect(pathname + urlParameters);
-})
+router.post("/admin/compose/:id", admin_controller.admin_blog_compose);
 
 // List of Blogs made
-router.get("/admin/blogs/:id", (req, res) => {
-
-    BlogsData.find({}, (err, data) => {
-        try {
-
-            if (!data) res.send("No blogs available");
-            else {
-                res.render('admin/admin_blogs', {posts: data});
-            }
-
-        } catch(err) {
-            res.send(err);
-        }
-    });
-
-})
+router.get("/admin/blogs/:id", admin_controller.admin_blogsList);
 
 // Full Blog separate route
+// ERROR
 router.get("/admin/:blogID", (req, res) => {
-    BlogsData.findOne({'_id': req.params.blogID}, (err, data) => {
+    
+    const findObject = (val) => {
+        return BlogsData.findOne({'_id': val}).exec();
+    }
+    
+    async () => {
+        const data = await findObject(req.params.blogID);
         res.render('blog', {title: data.title, content: data.content});
-    })
+    }
 })
 
 module.exports = router;

@@ -1,8 +1,9 @@
-// require('dotenv/config')
+require('dotenv/config')
 const { verify } = require('jsonwebtoken');
 const { hash, compare } = require('bcryptjs');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const connectDB = require('./config/database');
 
 // EXPRESS
 const express = require('express');
@@ -10,10 +11,11 @@ const app = express();
 app.use(express.urlencoded())
 app.use(express.static("public"));
 app.use(cookieParser());
-
+app.use(express.json());
 app.use(
     cors({
-        origin: 'http://localhost:3000',
+        origin: ["http://localhost:3000"],
+        methods: ["GET", "POST"],
         credentials: true
     })
 );
@@ -31,6 +33,7 @@ const user = require('./Routes/user.js');
 const admin = require('./Routes/admin.js');
 
 // Mongoose connect and model
+connectDB();
 const UserData = require('./models/db.js');
 
 // LOGIN/SIGNUP 
