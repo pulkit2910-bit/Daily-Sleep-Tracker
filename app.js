@@ -21,10 +21,6 @@ app.use(
 // EJS
 app.set('view engine', 'ejs');
 
-// Morgan
-var morgan = require('morgan')
-app.use(morgan('combined'))
-
 // URL
 const {URLSearchParams} = require('url')
 
