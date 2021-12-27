@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const UserData = require('../models/db');
 const path = require("path");
-const jwt = require('jsonwebtoken');
 const { hash, compare } = require('bcryptjs');
 
 // MIDLLEWARE
@@ -31,20 +30,6 @@ router.post("/signup", validateUser, (req, res) => {
                 'password': hashedPassword
             })
             newData.save();
-
-            try {
-                jwt.sign({id: newData._id},{expiresIn: 60},function(err, token) {
-                    if(err){
-                        res.send(err)
-                    }
-                    res.status(200).json({
-                        "token": token,
-                        "user": newData
-                    })
-                })
-            } catch (err) {
-                res.status(400).json({'error':err})
-            }
             
             const pathname = '/user/'
             const components = {

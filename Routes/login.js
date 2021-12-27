@@ -2,8 +2,6 @@ require('dotenv/config')
 const express = require('express');
 const router = express.Router();
 const UserData = require('../models/db');
-const { createAccessToken, createRefreshToken, sendAccessToken, sendRefreshToken } = require('./token');
-const jwt = require('jsonwebtoken');
 const { hash, compare } = require('bcryptjs');
 const cookieParser=require('cookie-parser');
 
@@ -24,12 +22,6 @@ router.post("/login", validateUser, (req, res) => {
         else {
             const valid  = await compare(password, user.password);
             if (!valid) return res.json({ isAuth : false,message : "password doesn't match"});
-
-            // // 3. Create Refresh and Access Token
-            
-            const token = jwt.sign({id: user._id},process.env.ACCESS_TOKEN_SECRET,{
-                expiresIn: '7d'
-            });
 
             const pathname = '/user/'
             const urlParameters = user._id;  

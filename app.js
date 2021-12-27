@@ -1,5 +1,4 @@
 require('dotenv/config')
-const { verify } = require('jsonwebtoken');
 const { hash, compare } = require('bcryptjs');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
