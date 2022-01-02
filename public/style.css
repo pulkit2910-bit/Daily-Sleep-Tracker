@@ -22,7 +22,7 @@ a.nav-link {
     padding: 0% 25%;
 }
 section {
-    padding: 3% 8%;
+    padding: 0% 8% 5% 8%;
 }
 .p-primary {
     font-size: 1.25rem;
@@ -223,4 +223,59 @@ input::placeholder{
 .active-music {
     outline: none;
     box-shadow: 0px 20px 20px 5px blue;
+}
+.chart{
+    
+    position: relative;
+    width: 100vw;
+}
+@media (min-width: 670px) {
+    
+    .chart{
+
+        position: relative;
+        width: 60vw;
+    }
+}
+#graph{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#table{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+td{
+
+    /* background-color: #FD795E; */
+    /* border-radius: 15px; */
+}
+th{
+
+    background-color: #FFC107;
+    color: #666666;
+    font-weight: 490;
+}
+tr{
+
+    text-align: center;
+}
+#stats{
+
+    text-align: center;
+    margin-top: 4%;
+    margin-bottom: 0;
+    font-size: 25px;
+    color: #705FA6;
+}
+tbody{
+
+    background-color: #FD805E;
+    /* border: 1px solid black; */
+    /* border-radius: 15px; */
 }

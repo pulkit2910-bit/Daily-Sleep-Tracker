@@ -12,6 +12,17 @@
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Chart -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+    <style>
+
+      table{
+
+        background-color: #FE6B5E;
+      }
+    </style>
 </head>
 <body class = "bg-warning">
   
@@ -27,6 +38,9 @@
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0 pull-right">
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#tracker">Tracker</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#about">About</a>
@@ -46,29 +60,123 @@
 
         <div class = "container">
         
-            <div class = "heading-home">
-                
-                <div class="home-content">
-                    <h1 class="heading-home">Welcome to Sleepify!</h1>
-                </div>
-                
-                <div class="home-content">
-                    <div class="home-sec-content">
-                        <p class="p-primary">This web app will fulfill the user's needs in tracking their sleeping patterns, including duration and timings.</p>
-                        <form class = "buttons-home" action="/user/<%= action %>" method="post">
-                    
-                            <button class = "btn text-light" style = "background-color: #3D3856;" type="submit" formaction="/user/newEntry-route/<%= action %>">New Entry</button>
-                            
-                        </form>
-                    </div>
-                    <img class = "img-fluid" src = "../sleep.png" width="40%">
-                </div>
-                
+          <div class = "heading-home">
+              
+            <div class="home-content">
+                <h1 class="heading-home">Welcome to Sleepify!</h1>
             </div>
             
+            <div class="home-content">
+              <div class="home-sec-content">
+                  <p class="p-primary">This web app will fulfill the user's needs in tracking their sleeping patterns, including duration and timings.</p>
+                  <form class = "buttons-home" action="/user/<%= action %>" method="post">
+              
+                  <button class = "btn text-light" style = "background-color: #3D3856;" type="submit" formaction="/user/newEntry-route/<%= action %>">+ New Entry</button>
+                      
+                  </form>
+              </div>
+                <img class = "img-fluid" src = "../sleep.png" width="40%">
+            </div> 
+          </div>
         </section>
         
     <hr>
+
+    <div id = "tracker" class = "heading-home pt-5">
+        
+      <p>Tracker</p>
+    </div>
+
+    <p id = "stats">Sleep Duration</p>
+
+      <section id = "graph">
+
+        <div class="chart">
+
+          <canvas id = "myCharts"></canvas>
+        </div>
+      </section>
+      
+      <p id = "stats">Sleep Stats</p>
+      <section id = "table">
+        
+        <table class="table table-borderless w-auto">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Sleep time</th>
+              <th scope="col">WakeUp time</th>
+              <th scope="col">Sleep duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Monday</th>
+
+              <div class="sleepContent">
+              <td>00:00</td>
+              <td>06:00</td>
+              <td>5 HRS</td>
+              </div>
+            </tr>
+            <tr>
+              <th scope="row">Tuesday</th>
+
+              <div class="sleepContent">
+              <td>00:00</td>
+              <td>05:30</td>
+              <td>5.5 HRS</td>
+              </div>
+            </tr>
+            <tr>
+              <th scope="row">Wednesday</th>
+
+              <div class="sleepContent">
+                <td>23:00</td>
+                <td>6:00</td>
+                <td>7 HRS</td>
+              </div>
+            </tr>
+            <tr>
+              <th scope="row">Thursday</th>
+
+              <div class="sleepContent">
+                <td>01:00</td>
+                <td>7:00</td>
+                <td>6 HRS</td>
+              </div>
+            </tr>
+            <tr>
+              <th scope="row">Friday</th>
+
+              <div class="sleepContent">
+                <td>23:00</td>
+                <td>07:00</td>
+                <td>8 HRS</td>
+              </div>
+            </tr>
+            <tr>
+              <th scope="row">Saturday</th>
+
+              <div class="sleepContent">
+                <td>01:00</td>
+                <td>06:00</td>
+                <td>6 HRS</td>
+              </div>
+            </tr>
+            <tr>
+              <th scope="row">Sunday</th>
+
+              <div class="sleepContent">
+                <td>00:00</td>
+                <td>07:00</td>
+                <td>7 HRS</td>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <hr>
       <section id="about">
 
         <div class = "heading-home">
@@ -295,6 +403,93 @@
 </section>
     <hr>
 
+    <script>
+
+      // Chart.defaults.global.defaultFontSize = 18;
+  
+      let ctx = document.getElementById("myCharts").getContext("2d");
+  
+      const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+      gradient.addColorStop(0, 'rgb(255, 27, 76)');
+      gradient.addColorStop(1, 'rgba(252, 121, 150, 0.6)');
+  
+      let delayed;
+      Chart.defaults.font.size = 14;
+
+      const chart = new Chart(ctx, {
+  
+        type: 'line',
+  
+        data:{
+  
+          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+  
+          datasets:[{
+  
+            label:"Sleep hours",
+
+            // data will be taken from the db
+            data:[5, 5.5, 7, 6, 8, 6, 7],
+  
+            backgroundColor: gradient,
+  
+            // borderColor: "#fff"
+  
+            pointBackgroundColor: '#b9b2e0',
+            fill: true,
+            tension: 0.35
+          }],
+        },
+        options:{
+  
+          animation: {
+  
+            onComplete: () => {
+              delayed = true;
+            },
+            delay: (context) => {
+              let delay = 0;
+              if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                delay = context.dataIndex * 300 + context.datasetIndex * 100;
+              }
+            return delay;
+            },
+          },
+          responsive: true,
+          radius: 3,
+          hoverRadius: 8,
+          hitRadius: 30,
+
+          plugins:{
+
+            title:{
+    
+              display: false,
+              text: "Sleep Duration",
+              // position: 'left',
+              color: "black",
+              font:{
+
+                size: 20,
+                family: "sans-serif",
+                weight: 10
+              }
+            },
+            legend:{
+    
+              display: false
+            },
+            layout:{
+    
+              padding:{
+    
+                // left: 50
+              }
+            }
+          },
+        }
+      })
+    </script>
     <script>
       function myFunction() {
           document.getElementById("submit").submit();
